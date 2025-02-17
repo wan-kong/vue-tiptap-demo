@@ -50,6 +50,8 @@ npm run build
 
 ## 自定义组件
 
+![Snipaste_2025-02-17_22-13-36](.\static\Snipaste_2025-02-17_22-13-36.png)
+
 ### 按钮组件
 ```markdown
 <vue-button type="primary" size="medium">主要按钮</vue-button>

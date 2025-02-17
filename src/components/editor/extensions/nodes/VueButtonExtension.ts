@@ -13,20 +13,49 @@ declare module '@tiptap/core' {
 const VueButtonExtension = Node.create({
   name: 'vue-button',
 
-  group: 'block',
+  group: 'inline',
+  inline: true,
+  atom: true,
 
-  content: 'inline*',
+  addAttributes() {
+    return {
+      text: {
+        default: ''
+      },
+      type: {
+        default: 'primary'
+      },
+      size: {
+        default: 'medium'
+      },
+      clickCount: {
+        default: 0
+      }
+    }
+  },
 
   parseHTML() {
     return [
       {
         tag: 'vue-button',
-      },
+        getAttrs: element => {
+          if (!(element instanceof HTMLElement)) return false
+          return {
+            text: element.textContent,
+            type: element.getAttribute('type'),
+            size: element.getAttribute('size')
+          }
+        }
+      }
     ]
   },
 
   renderHTML({ node }) {
-    return ['vue-button', { type: node.attrs.type, size: node.attrs.size }, 0]
+    return ['vue-button', {
+      type: node.attrs.type,
+      size: node.attrs.size,
+      text: node.attrs.text
+    }]
   },
 
   addNodeView() {

@@ -24,10 +24,6 @@ const previewEditor = shallowRef(useEditor({
   }
 }))
 
-// 监听按钮状态变化
-const handleButtonStateChange = (attrs: { text: string, type: string, size: string, clickCount: number }) => {
-  markdownParser.updateButtonState(attrs.text, attrs.type, attrs.size, attrs.clickCount)
-}
 
 watch(markdownContent, (newContent) => {
   const html = markdownParser.render(newContent)
@@ -36,11 +32,38 @@ watch(markdownContent, (newContent) => {
 </script>
 
 <template>
-  <div class="w-full max-w-7xl mx-auto p-4 space-y-6">
-    <EditorContent v-model="markdownContent" />
-    <EditorPreview 
-      :editor="previewEditor" 
-      @button-state-change="handleButtonStateChange"
-    />
+  <div class="w-full max-w-screen-2xl mx-auto p-4">
+    <div class="grid grid-cols-2 gap-4">
+      <EditorContent v-model="markdownContent" />
+      <EditorPreview 
+        :editor="previewEditor" 
+      />
+    </div>
   </div>
-</template> 
+</template>
+
+<style>
+.grid {
+  height: calc(100vh - 2rem);
+}
+
+/* 添加滚动条样式 */
+.grid > div {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #CBD5E0 #F7FAFC;
+}
+
+.grid > div::-webkit-scrollbar {
+  width: 6px;
+}
+
+.grid > div::-webkit-scrollbar-track {
+  background: #F7FAFC;
+}
+
+.grid > div::-webkit-scrollbar-thumb {
+  background-color: #CBD5E0;
+  border-radius: 3px;
+}
+</style> 

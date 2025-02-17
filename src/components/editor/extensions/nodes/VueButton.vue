@@ -5,8 +5,11 @@ import { computed } from 'vue'
 
 const props = defineProps<NodeViewProps>()
 
-const buttonType = computed(() => props.node.attrs.type || 'primary')
-const buttonSize = computed(() => props.node.attrs.size || 'medium')
+type ButtonType = 'primary' | 'success' | 'warning' | 'danger' | 'default'
+type ButtonSize = 'small' | 'medium' | 'large'
+
+const buttonType = computed(() => props.node.attrs.type as ButtonType || 'primary')
+const buttonSize = computed(() => props.node.attrs.size as ButtonSize || 'medium')
 const clickCount = computed(() => props.node.attrs.clickCount || 0)
 
 const handleClick = () => {

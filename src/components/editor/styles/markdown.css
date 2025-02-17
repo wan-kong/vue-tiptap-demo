@@ -1,0 +1,103 @@
+/* 导入 GitHub Markdown 和代码高亮样式 */
+@import 'github-markdown-css/github-markdown.css';
+@import 'highlight.js/styles/github.css';
+@import 'katex/dist/katex.min.css';
+
+.markdown-preview {
+  @apply p-4 min-h-[300px] max-w-none;
+  
+  /* 基础文本样式 */
+  @apply text-gray-700 leading-6;
+  @apply [&_p]:my-2 [&_p]:leading-6;
+  
+  /* 标题样式 */
+  @apply [&_h1]:text-2xl [&_h1]:font-semibold [&_h1]:text-gray-900 [&_h1]:mt-6 [&_h1]:mb-3;
+  @apply [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-gray-900 [&_h2]:mt-5 [&_h2]:mb-3;
+  @apply [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-gray-900 [&_h3]:mt-4 [&_h3]:mb-2;
+  
+  /* 列表样式 */
+  @apply [&_ul]:my-2 [&_ul]:pl-5 [&_ul_li]:my-1;
+  @apply [&_ol]:my-2 [&_ol]:pl-5 [&_ol_li]:my-1;
+  @apply [&_li]:text-gray-700;
+  
+  /* 链接样式 */
+  @apply [&_a]:text-blue-600 [&_a]:no-underline [&_a]:font-normal;
+  @apply [&_a:hover]:underline;
+  
+  /* 引用样式 */
+  @apply [&_blockquote]:my-3 [&_blockquote]:py-0.5;
+  
+  /* 行内代码样式 */
+  @apply [&_:not(pre)_>_code]:bg-gray-100 [&_:not(pre)_>_code]:text-gray-800;
+  @apply [&_:not(pre)_>_code]:px-1.5 [&_:not(pre)_>_code]:py-0.5 [&_:not(pre)_>_code]:rounded;
+  @apply [&_:not(pre)_>_code]:text-sm [&_:not(pre)_>_code]:font-normal;
+  @apply [&_:not(pre)_>_code]:before:content-none [&_:not(pre)_>_code]:after:content-none;
+  
+  /* 表格样式 */
+  @apply [&_table]:w-full [&_table]:my-3 [&_table]:border-collapse [&_table]:text-sm;
+  @apply [&_th]:bg-gray-50 [&_th]:text-left [&_th]:px-2 [&_th]:py-1 [&_th]:border [&_th]:border-gray-200 [&_th]:font-medium;
+  @apply [&_td]:px-2 [&_td]:py-1 [&_td]:border [&_td]:border-gray-200;
+  
+  /* 水平线样式 */
+  @apply [&_hr]:my-6;
+  
+  /* 图片样式 */
+  @apply [&_img]:my-3 [&_img]:rounded-lg [&_img]:shadow-sm;
+  @apply [&_img]:max-w-full [&_img]:h-auto [&_img]:object-cover;
+  @apply [&_img]:mx-auto [&_img]:block;
+  @apply [&_img]:hover:shadow-md [&_img]:transition-shadow;
+  
+  /* 任务列表样式 */
+  @apply [&_.task-list-item]:flex [&_.task-list-item]:items-start [&_.task-list-item]:gap-2;
+  @apply [&_.task-list-item_input]:mt-1 [&_.task-list-item_input]:rounded;
+  @apply [&_.task-list-item_input]:border [&_.task-list-item_input]:border-gray-300;
+  @apply [&_.task-list-item_input:checked]:bg-blue-500 [&_.task-list-item_input:checked]:border-blue-500;
+  
+  /* 主题相关 */
+  @apply dark:!bg-white dark:!text-gray-900;
+  
+  /* 数学公式样式 */
+  @apply [&_.katex-display]:!my-4;
+  @apply [&_.katex-display]:overflow-x-auto;
+  @apply [&_.katex-display]:overflow-y-hidden;
+  @apply [&_.katex]:!text-current;
+  @apply [&_.katex-html]:!hidden;  /* 隐藏 HTML 回退 */
+
+  /* Mention 样式 */
+  @apply [&_span[data-type="mention"]]:inline-flex [&_span[data-type="mention"]]:items-center;
+  @apply [&_span[data-type="mention"]]:bg-blue-100 [&_span[data-type="mention"]]:text-blue-800;
+  @apply [&_span[data-type="mention"]]:rounded [&_span[data-type="mention"]]:px-1.5 [&_span[data-type="mention"]]:py-0.5;
+  @apply [&_span[data-type="mention"]]:text-sm [&_span[data-type="mention"]]:mx-1;
+  @apply [&_span[data-type="mention"]]:hover:bg-blue-200 [&_span[data-type="mention"]]:transition-colors;
+  @apply [&_span[data-type="mention"]]:cursor-pointer;
+
+  /* 代码块样式 */
+  @apply [&_pre_code]:bg-transparent [&_pre_code]:text-gray-800;
+  @apply [&_pre_code]:p-0 [&_pre_code]:text-sm [&_pre_code]:font-normal;
+  @apply [&_pre_code]:before:content-none [&_pre_code]:after:content-none;
+}
+
+/* 移除 prose 的一些默认样式 */
+.markdown-preview :where(code):not(:where([class~="not-prose"] *))::before,
+.markdown-preview :where(code):not(:where([class~="not-prose"] *))::after {
+  content: none;
+}
+
+.markdown-preview :where(blockquote p:first-of-type):not(:where([class~="not-prose"] *))::before,
+.markdown-preview :where(blockquote p:first-of-type):not(:where([class~="not-prose"] *))::after {
+  content: none;
+}
+
+/* 复选框样式 */
+.markdown-preview .task-list-item input[type="checkbox"]:checked {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3E%3Cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3E%3C/svg%3E");
+}
+
+/* 行内代码高亮样式 */
+.hljs-inline .hljs-keyword { @apply text-purple-600; }
+.hljs-inline .hljs-string { @apply text-green-600; }
+.hljs-inline .hljs-number { @apply text-orange-600; }
+.hljs-inline .hljs-function { @apply text-blue-600; }
+.hljs-inline .hljs-title { @apply text-blue-600; }
+.hljs-inline .hljs-params { @apply text-gray-600; }
+.hljs-inline .hljs-comment { @apply text-gray-500; } 
